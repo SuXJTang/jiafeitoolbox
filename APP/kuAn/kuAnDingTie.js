@@ -1,6 +1,9 @@
-// 顶贴
-
-// const fun = kuAnDingTie("../../test/fun");
+/**
+ * @Last Modified Time: 
+ * @Last Modified By: jiafei
+ * @Description:酷安自动顶贴脚本 适用于root模式
+ * @Version: 1.0.0
+ */
 
 // var data = {
     // reply_content= "[酷币][酷币][酷币]"

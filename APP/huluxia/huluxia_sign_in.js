@@ -51,7 +51,7 @@ function huluxia_sign_in() {
         // 判断页面中最后一个板块是否可点击，bottom大于底部导航栏的top则滑动
         if (板块名[i] == item_container[item_container.length - 2].findOne(id('com.huluxia.gametools:id/title')).text()) {
             var bto = item_container[item_container.length - 2].bounds();
-            console.log(bto.bottom, tab);
+            // console.log(bto.bottom, tab);
             var 意见反馈 = id("com.huluxia.gametools:id/title2").text("意见反馈").className("android.widget.TextView").checked(false).findOne(500);
             if (!意见反馈) {
                 swipe(bto.centerX(), bto.top, bto.centerX(), ibl, 1000);
@@ -74,6 +74,8 @@ function huluxia_sign_in() {
     }
 
     // 提示用户脚本运行结束
+    home();
+    sleep(1000);
     toastLog("葫芦侠脚本运行结束");
 
 // --------------------- 函数定义 ---------------------
