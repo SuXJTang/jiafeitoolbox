@@ -1,8 +1,12 @@
 /**
- * @Last Modified Time: 
- * @Last Modified By: jiafei
- * @Description:酷安自动发帖脚本 适用于root模式
- * @Version: 1.0.0
+ * 创建时间：2021-08-01 17:05:04
+ * 修改时间：2021-08-01 17:05:04
+ * 修改内容：
+ * 脚本名称：killApp.js
+ * 脚本功能：杀死应用
+ * 脚本作者：jiafei
+ * 脚本版本：1.0.0
+ * 描述：酷安自动发帖脚本 适用于root模式
  */
 
 function fatie(data) {
@@ -54,7 +58,7 @@ function fatie(data) {
         click(returned[1].bounds().centerX() + random(-5, 5), returned[1].bounds().centerY() + random(-5, 5));
         sleep(500);
     } else {
-        toastLog("未找到符合条件的控件");
+        // toastLog("未找到符合条件的控件");
     };
 
     var returned = id("com.coolapk.market:id/alertTitle").text("访问照片、视频、音频权限申请").className("android.widget.TextView").checked(false).findOne(500);
@@ -82,7 +86,7 @@ function fatie(data) {
         click(下一步.bounds().centerX(), 下一步.bounds().centerY());
         sleep(500);
     } else {
-        toastLog("未找到符合条件的控件"+re);
+        // toastLog("未找到符合条件的控件"+re);
     };
     sleep(500);
     var 继续发布 = id("android:id/button1").findOne(500);
@@ -90,7 +94,7 @@ function fatie(data) {
         click(继续发布.bounds().centerX(), 继续发布.bounds().centerY());
         sleep(500);
     } else {
-        toastLog("未找到符合条件的控件"+继续发布);
+        // toastLog("未找到符合条件的控件"+继续发布);
     };
     sleep(500);
     var edit_text = id("com.coolapk.market:id/edit_text").className("android.widget.EditText").checked(false).findOne(500);
@@ -98,10 +102,11 @@ function fatie(data) {
         click(edit_text.bounds().centerX() + random(-5, 5), edit_text.bounds().centerY() + random(-5, 5));
         sleep(500);
     } else {
-        toastLog("未找到符合条件的控件"+edit_text);
+        // toastLog("未找到符合条件的控件"+edit_text);
     };
     sleep(500);
-    setText(data.content+"\n\n"+data.attachmentContent)
+    setText(data.content)
+    // setText(data.content+"\n\n"+data.attachmentContent)
     sleep(1000)
     var 发布 = id("com.coolapk.market:id/submit_view").text("发布").findOne(500);
     if (发布) {
@@ -110,6 +115,8 @@ function fatie(data) {
     } else {
         toastLog("未找到符合条件的控件"+发布);
     };
+
+    sleep(3000);
 
 }
 

@@ -90,11 +90,13 @@ function qmsqfatie(data) {
     sleep(500);
     var ps_tv_title = id("com.magicalstory.AppStore:id/ps_tv_title").text("相机胶卷").className("android.widget.TextView").checked(false).waitFor();
     sleep(500);
+
     var tvCheck = id("com.magicalstory.AppStore:id/tvCheck").className("android.widget.TextView").checked(false).find()
     for (var i = 2; i > -1; i--) {
         click(tvCheck[i].bounds().centerX() + random(-5, 5), tvCheck[i].bounds().centerY() + random(-5, 5));
         sleep(500);
     }
+
     // 添加图片完成
     sleep(500);
     var ps_complete_select = id("com.magicalstory.AppStore:id/ps_complete_select").className("android.widget.LinearLayout").checked(false).findOne(500);
@@ -115,7 +117,7 @@ function qmsqfatie(data) {
     };
     while (true) {
         var whoLook = id("com.magicalstory.AppStore:id/textView6").text("谁可以看").className("android.widget.TextView").checked(false).findOne(500);
-        console.log(whoLook.bounds().bottom);
+        // console.log(whoLook.bounds().bottom);
 
         if (whoLook) {
             if (whoLook.bounds().bottom < endNav.bounds().top) {
@@ -146,7 +148,7 @@ function qmsqfatie(data) {
     sleep(500);
     while (true) {
         var whoLook = id("com.magicalstory.AppStore:id/textView6").text("谁可以看").className("android.widget.TextView").checked(false).findOne(500);
-        console.log(whoLook.bounds().bottom);
+        // console.log(whoLook.bounds().bottom);
 
         if (whoLook) {
             if (whoLook.bounds().bottom < endNav.bounds().top) {

@@ -53,7 +53,8 @@ var page_dingtie = {
     ),
     initList: function () {
         // ------------ 模块导入 ------------
-        var kuAnDingTie = require(engines.myEngine().cwd() + "app/kuAn/kuAnDingTie.js")
+        // var kuAnDingTie = require(engines.myEngine().cwd() + "app/kuAn/kuAnDingTie.js")
+        var kuAnDingTie = require("../APP/kuAn/kuAnDingTie.js")
 
         // 返回按钮
         ui.returned.on("click", function () {

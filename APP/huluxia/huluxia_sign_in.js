@@ -94,6 +94,10 @@ function huluxia_sign_in() {
             // toastLog("今日已签到");
         };
         sleep(500);
+        if(id('com.huluxia.gametools:id/iv_signin_rule').findOne(500)){
+            back();
+        }
+        sleep(500);
         back();
         sleep(1000);
     }

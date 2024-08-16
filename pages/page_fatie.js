@@ -136,9 +136,16 @@ var page_fatie = {
     ),
     initList: function () {
         // ----------------- 模块导入 -----------------
-        var kuAnFatie = require(engines.myEngine().cwd() + "APP/kuAn/kuAnFatie");
-        var qmyyFaTie = require(engines.myEngine().cwd() + "APP/qmyy/qmyyFaTie");
-        var getHttpImg = require(engines.myEngine().cwd() + "util/getTuUtil.js")
+        // var kuAnFatie = require(engines.myEngine().cwd() + "APP/kuAn/kuAnFatie");
+        var kuAnFatie = require("../APP/kuAn/kuAnFatie");
+        // var qmyyFaTie = require(engines.myEngine().cwd() + "APP/qmyy/qmyyFaTie");
+        var qmyyFaTie = require("../APP/qmyy/qmyyFaTie");
+        // var getHttpImg = require(engines.myEngine().cwd() + "util/getTuUtil.js")
+        var getHttpImg = require("../util/getTuUtil.js")
+        // var jmkjFaTie = require(engines.myEngine().cwd() + "APP/jmkj/jmkjFaTie.js")
+        var jmkjFaTie = require("../APP/jmkj/jmkjFaTie.js")
+        // var killApp = require(engines.myEngine().cwd() + "/util/killApp.js");
+        var killApp = require("../util/killApp.js");
 
         // ----------------- 变量定义 -----------------
         var imgs = [ui.tu1.getText(), ui.tu2.getText(), ui.tu3.getText()]
@@ -146,7 +153,7 @@ var page_fatie = {
         // ----------------- 数据区域 -----------------
         var data = {
             "tag": "影视", // 标签
-            "title": "测试标题", // 贴子标题
+            "title": "布蕾4K，观影革命", // 贴子标题
             "content": "💥 布蕾4K，观影革命！💥\n👑 极致画质，影院级享受！\n🚀 超快播放，告别缓冲！\n🔥 海量资源，想看就看！\n\n立刻下载，观影从此不同！", // 贴子内容
             "attachmentTitle": "下载链接", // 附件标题
             "attachmentContent": "https://ts0616.lanzn.com/iwE0X2712umf", // 附件内容/链接
@@ -158,8 +165,10 @@ var page_fatie = {
 
         // 返回监控
         ui.returned.on("click", function () {
+        // var page_fatie_main = require(engines.myEngine().cwd() + "pages/page_fatie_main.js")
+        var page_fatie_main = require("../pages/page_fatie_main.js")
             console.log("点击了返回");
-            page_main.activate();
+            page_fatie_main.activate("");
         });
 
         // 开始监控
@@ -183,15 +192,22 @@ var page_fatie = {
                     for (var i = 0; i < app.length; i++) {
                         switch (app[i]) {
                             case "酷安":
-                                // console.log("进入酷安发帖");
+                                console.log("进入酷安发帖");
                                 kuAnFatie(data)
+                                killApp("com.coolapk.market")
                                 break;
                             case "奇妙应用":
-                                // console.log("进入奇妙应用发帖");
+                                console.log("进入奇妙应用发帖");
                                 qmyyFaTie(data);
+                                killApp("com.qimiaoyou.app")
                                 break;
                             case "奇异社区":
-                                // console.log("进入奇异社区发帖");
+                                console.log("进入奇异社区发帖");
+                                break;
+                            case "芥末空间":
+                                console.log("进入芥末空间发帖");
+                                jmkjFaTie(data)
+                                killApp("com.jmbbs2023")
                                 break;
                             default:
                                 toastLog("暂不支持该应用");
@@ -204,7 +220,7 @@ var page_fatie = {
     },
     activate: function (apps) {
         app = apps
-        // console.log(app);
+        console.log(app);
         setContainer(this.ui);
         if (!this.inited) this.initList();
         this.inited = true;

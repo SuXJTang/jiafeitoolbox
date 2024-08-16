@@ -6,13 +6,20 @@
 //   "",
 // ];
 
+
 function getHttpImg(imgs) {
-  if (!files.exists(engines.myEngine().cwd() + "images/cache/jiafeiimg/")) {
-    files.create(engines.myEngine().cwd() + "images/cache/jiafeiimg/");
+  // if (!files.exists(engines.myEngine().cwd() + "images/cache/jiafeiimg/")) {
+  //   files.create(engines.myEngine().cwd() + "images/cache/jiafeiimg/");
+  //   console.log("文件夹【jiafeiimg】已创建");
+  // } else {
+  //   console.log("存在文件夹【jiafeiimg】");
+  //   log(engines.myEngine().cwd())
+  // }
+  if (!files.exists("/sdcard/jiafeiimg/")) {
+    files.create("/sdcard/jiafeiimg/");
     console.log("文件夹【jiafeiimg】已创建");
   } else {
-    console.log("存在文件夹【jiafeiimg】");
-    log(engines.myEngine().cwd())
+    // console.log("存在文件夹【jiafeiimg】");
   }
 
   for (var i = 0; i < imgs.length; i++) {
@@ -20,7 +27,7 @@ function getHttpImg(imgs) {
       var url = imgs[i];
       // console.log(url);
       var pic = images.load(url);
-      var imgspath = engines.myEngine().cwd() + "images/cache/jiafeiimg/" + i + ".jpg";
+      var imgspath = "/sdcard/jiafeiimg/" + i + ".jpg";
       console.log(imgspath);
       sleep(1000);
       images.save(pic, imgspath, "jpg", 50);
@@ -36,5 +43,5 @@ function getHttpImg(imgs) {
 
 }
 
-// getHttpImg();
+// getHttpImg(imgs);
 module.exports = getHttpImg;
