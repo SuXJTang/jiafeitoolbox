@@ -13,6 +13,17 @@
 // qmsqfatie(data)
 // --------------------- 发贴 ---------------------  
 function qmsqfatie(data) {
+    // 清理软件缓存
+    var packageName = "com.magicalstory.AppStore"; // 包名
+    app.openAppSetting(packageName)
+    text("存储").findOne().clickCenter()
+    text("清除缓存").findOne().clickCenter()
+    var packageName = 'com.android.settings'
+    var sh = new Shell(true);
+    sh.exec("am force-stop " + " " + packageName);
+    sh.exit();
+    toastLog("清理完成");
+    sleep(3000)
 
     //打开应用
     app.startActivity({
@@ -22,6 +33,20 @@ function qmsqfatie(data) {
         category: ["android.intent.category.LAUNCHER"],
         flags: ["activity_new_task"]
     });
+
+    // 检测更新弹窗
+    var thread = threads.start(function () {
+        //在新线程执行的代码
+        while (true) {
+            // 版本更新
+            if (textContains("发现新版本").exists()) {
+                text("忽略此版本").findOne().clickCenter();
+                echo_log('关闭更新');
+            }
+        }
+    });
+
+
 
     // 通过判断搜索框确定是否到达首页
     var searchBar = id("com.magicalstory.AppStore:id/home").desc("首页").className("android.widget.FrameLayout").checked(false).waitFor();
@@ -39,6 +64,8 @@ function qmsqfatie(data) {
     sleep(500);
 
     // 点击 实用软件
+    // 关闭更新检测子线程
+    thread.interrupt();
     var 实用软件 = id("com.magicalstory.AppStore:id/name").text("实用软件").className("android.widget.TextView").checked(false).findOne(500);
     if (实用软件) {
         click(实用软件.bounds().centerX() + random(-5, 5), 实用软件.bounds().centerY() + random(-5, 5));

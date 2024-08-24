@@ -10,7 +10,7 @@ var app = []
 var page_fatie_main = {
     ui: ui.inflate(
         <vertical>
-            <appbar gravity="center" bg="#B0C4DE" h="45dp">
+            <appbar gravity="center" bg="#ffffff" h="45dp">
                 <horizontal h="*">
                     <vertical id="returned" h="*" gravity="center" marginLeft="10dp">
                         <horizontal>
@@ -35,7 +35,7 @@ var page_fatie_main = {
                     <vertical id="v1" visibility="gone">
                         <vertical margin="10 0">
                             <button h="40dp" id="selectFile" bg="#87CEFA" w="auto" text="选择文件..." />
-                            <text id="fileName" text="请选择格式xls的文件" />
+                            <text id="fileName" text="请选择文件" />
                         </vertical>
                     </vertical>
                 </vertical>
@@ -81,15 +81,16 @@ var page_fatie_main = {
                 var uri = data.getData();
                 log("uri: %s", uri.toString());
                 filepath = URIUtils_uriToFile(uri);
-                log(filepath);
-                files.getExtension(filepath) == "xls" ? ui.fileName.setText(filepath) : toastLog("请选择格式xls的文件");
-                if (ui.fileName.text != "请选择格式xls的文件") {
+                // log(filepath);
+                // files.getExtension(filepath) == "xlsx" ? ui.fileName.setText(filepath) : toastLog("请选择格式xlsx的文件");
+                ui.fileName.setText(filepath)
+                if (ui.fileName.text != "请选择格式xlsx的文件") {
                     ui.selectFile.setText("重新选择")
                     ui.selectFile.attr("bg", "#EED8AE")
                 }
             } catch (error) {
                 /* 处理异常的代码块 */
-                toastLog("请选择格式xls的文件");
+                // toastLog("请选择格式xlsx的文件");
                 console.error(error);
             }
 
@@ -100,29 +101,30 @@ var page_fatie_main = {
             page_fatie.activate(app);
         })
 
+        // 开始运行
         ui.start.on("click", () => {
+            // var excel = require("../util/excel.js");
+            var excel = require(engines.myEngine().cwd() + "util/excel.js");
             log("开始运行")
 
-            // 拿到xsl里面的数据
-            try {
-                var excel = require("../util/excel.js");
-                var data = excel(filepath)
-                log(data.length)
-            } catch (error) {
-                toastLog("请添加xls文件")
-                console.error(error);
-            }
+            // 拿到数据
+            var data = excel(filepath)
+            // log(data)
+
             // 创建一个 Handler 来处理主线程中的UI更新
             const handler = new android.os.Handler(android.os.Looper.getMainLooper());
 
             threads.start(function () {// 对图片进行连接进行处理
                 for (var j = 0; j < data.length; j++) {
-
-                    var imgs = data[j].uri.split("|")
-                    data[j].attachmentTitle = "下载链接"
+                    // 使用 Handler 来更新UI
                     handler.post(function () {
                         ui.loading.attr("visibility", "visible");
                     });
+
+                    // 下载图片
+                    var imgs = data[j].uri.split("|")
+                    data[j].attachmentTitle = "下载链接"
+                    // log(imgs)
                     getTuUtil(imgs)
 
                     // 使用 Handler 来更新UI

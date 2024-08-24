@@ -1,6 +1,14 @@
+/**
+ * @Last Modified Time: 
+ * @Last Modified By: jiafei
+ * @Description: 加菲工具箱
+ * @Version: 1.0.0
+ */
+
 "ui";
+"nodejs"
 auto();
-console.show();
+// console.show();
 ui.layout(
     <drawer id="drawer">
         <frame id="body" h="*" w="*"></frame>
@@ -79,13 +87,26 @@ var page_main = {
                         w="*"
                         h="auto"
                         margin="10"
-                        bg="#00FFFF"
+                        bg="#15c5ce"
+                        textColor="#ffffff"
+                    />
+                </vertical>
+                <vertical>
+                    <button
+                        id="start2"
+                        text="开始运行"
+                        w="*"
+                        h="auto"
+                        margin="10"
+                        bg="#15c5ce"
+                        textColor="#ffffff"
                     />
                 </vertical>
             </vertical>
         </frame>
     ),
     initList: function () {
+        "nodejs";
         // ----------------- 数据定义 -----------------
         var apps = [];
 
@@ -142,7 +163,11 @@ var page_main = {
         var page_fatie_main = require("./pages/page_fatie_main.js")
         ui.ft.on("click", () => {
             console.log("点击了发帖");
-            page_fatie_main.activate(apps);
+            if (apps.length > 0) {
+                page_fatie_main.activate(apps);
+            } else {
+                toastLog("请先选择要打开的应用");
+            }
         })
 
         // 签到
@@ -176,10 +201,19 @@ var page_main = {
 
         // 开始运行
         ui.start.on("click", () => {
+            var FilePath = "/storage/emulated/0/appSync/jiafeitoolbox/resource/123.xls"
             console.log("点击了开始运行");
-            // var excel = require(engines.myEngine().cwd() + "util/excel.js")
-            var excel = require("./util/excel.js")
-            excel()
+            var excel = require("./util/excel.js");
+            log(excel(FilePath))
+
+        })
+
+        ui.start2.on("click", () => {
+            var FilePath = "/storage/emulated/0/appSync/jiafeitoolbox/resource/321.xlsx"
+            console.log("点击了开始运行");
+            var excel = require(engines.myEngine().cwd() + "util/excel.js");
+
+            log(excel(FilePath))
         })
 
         // ---------------- 函数 ----------------

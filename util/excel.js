@@ -1,19 +1,30 @@
-function excel(path) {
-    runtime.loadJar(engines.myEngine().cwd() + "lib/jxl.jar")
-    // runtime.loadJar("../lib/jxl.jar")
-    importClass("java.io.File")
-    importClass("jxl.Cell")
-    importClass("jxl.Sheet")
-    importClass("jxl.Workbook")
-    importClass("jxl.CellType")
+// runtime.loadJar("../lib/jxl.jar")
+runtime.loadJar(engines.myEngine().cwd()+"lib/jxl.jar")
 
-    // file = new File(engines.myEngine().cwd() + "resource/123.xls");
-    file = new File(path);
+importClass("java.io.File")
+importClass("jxl.Cell")
+importClass("jxl.Sheet")
+importClass("jxl.Workbook")
+importClass("jxl.CellType")
+
+
+
+// const da = excel(file);
+// console.log(da);
+
+function excel(file) {
+    //1. 导入jxl的jar包
+//2. 获取到Excel文件
+    // file = new File("/storage/emulated/0/appSync/jiafeitoolbox/resource/123.xls");
+    file = new File(file);
     wb = Workbook.getWorkbook(file);
+    //3. 获取指定的sheet页码   通过指定的Sheet页的名字获取指定的Sheet页，也可以通过索引获取Sheet
     sheet = wb.getSheet("Sheet1");
-    cell = sheet.getCell(0, 0);
+    //4. 获取指定的单元格的数据  通过getCell方法获取指定单元格对象，参数是column,row,索引从0开始
+    cell = sheet.getCell(0, 1);
     // console.log(cell.getContents());
 
+    //4.1循环获取指定的行和列的单元格的值     外循环控制行，内循环控制列
 
     var arr = [];
     var bool = false;
@@ -60,17 +71,17 @@ function excel(path) {
                     break;
             }
         }
-           
+
         // log("----------------- 分割符 -----------------")
         if (bool) {
             break;
         }
-         arr.push(data); 
-        // log(data)
+        arr.push(data);
     }
+
     wb.close(); //关闭表格
-    // log(arr);
     return arr;
+
 }
 
 module.exports = excel;

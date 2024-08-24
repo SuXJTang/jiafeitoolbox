@@ -1,10 +1,11 @@
 "ui";
+ui.statusBarColor("#ffffff");
 
 var page_dingtie = {
     ui: ui.inflate(
         <frame>
             <vertical w="*" h="*" clickable="true">
-                <appbar gravity="center" bg="#B0C4DE" h="45dp">
+                <appbar gravity="center" bg="#ffffff" h="45dp">
                     <horizontal h="*">
                         <vertical id="returned" h="*" gravity="center" marginLeft="10dp">
                             <horizontal>

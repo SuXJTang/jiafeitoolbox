@@ -6,7 +6,7 @@ var app = [];
 var page_fatie = {
     ui: ui.inflate(
         <vertical>
-            <appbar gravity="center" bg="#B0C4DE" h="45dp">
+            <appbar gravity="center" bg="#ffffff" h="45dp">
                 <horizontal h="*">
                     <vertical id="returned" h="*" gravity="center" marginLeft="10dp">
                         <horizontal>
